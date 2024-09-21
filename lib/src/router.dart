@@ -1,21 +1,23 @@
-import 'package:go_router/go_router.dart';
+import 'package:flutter/material.dart';
 import 'package:waddle_app/src/features/auth/presentation/login/login_screen.dart';
 import 'package:waddle_app/src/features/auth/presentation/signup/signup_screen.dart';
 
-enum AppRoutes { login, signup }
+class AppRoutes {
+  static const String login = '/';
+  static const String signup = '/signup';
 
-final appRouter = GoRouter(
-  initialLocation: '/',
-  routes: [
-    GoRoute(
-      path: '/',
-      name: AppRoutes.login.name,
-      builder: (context, state) => const LoginScreen(),
-    ),
-    GoRoute(
-      path: '/signup',
-      name: AppRoutes.signup.name,
-      builder: (context, state) => const SignUpScreen(),
-    ),
-  ],
-);
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case AppRoutes.login:
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
+      case AppRoutes.signup:
+        return MaterialPageRoute(builder: (_) => const SignUpScreen());
+      default:
+        return MaterialPageRoute(
+          builder: (_) => Scaffold(
+            body: Center(child: Text('No route defined for ${settings.name}')),
+          ),
+        );
+    }
+  }
+}

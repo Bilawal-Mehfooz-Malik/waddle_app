@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:waddle_app/src/router.dart';
 import 'package:waddle_app/src/utils/validators.dart';
@@ -164,7 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _updateState() => setState(() {});
 
-  void _toggle() => context.goNamed(AppRoutes.login.name);
+  void _toggle() => Navigator.pushNamed(context, AppRoutes.login);
 
   void _signUp() {
     if (_formKey.currentState!.validate() && _isChecked) {
