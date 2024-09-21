@@ -7,8 +7,8 @@ import 'package:waddle_app/src/common/app_sizes.dart';
 import 'package:waddle_app/src/common/custom_dialog.dart';
 import 'package:waddle_app/src/utils/localization_extension.dart';
 import 'package:waddle_app/src/common/custom_text_form_field.dart';
-import 'package:waddle_app/src/features/auth/common/headline.dart';
-import 'package:waddle_app/src/features/auth/common/toggle_button.dart';
+import 'package:waddle_app/src/features/auth/presentation/common/headline.dart';
+import 'package:waddle_app/src/features/auth/presentation/common/toggle_button.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

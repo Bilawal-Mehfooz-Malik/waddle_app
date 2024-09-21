@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:waddle_app/src/features/auth/login/presentation/login_screen.dart';
-import 'package:waddle_app/src/features/auth/signup/presentation/signup_screen.dart';
+import 'package:waddle_app/src/features/auth/presentation/login/login_screen.dart';
+import 'package:waddle_app/src/features/auth/presentation/signup/signup_screen.dart';
 
 enum AppRoutes { login, signup }
 

@@ -7,10 +7,10 @@ import 'package:waddle_app/src/utils/validators.dart';
 import 'package:waddle_app/src/common/custom_dialog.dart';
 import 'package:waddle_app/src/utils/waddle_logo_getter.dart';
 import 'package:waddle_app/src/utils/localization_extension.dart';
-import 'package:waddle_app/src/features/auth/common/headline.dart';
+import 'package:waddle_app/src/features/auth/presentation/common/headline.dart';
 import 'package:waddle_app/src/common/custom_text_form_field.dart';
-import 'package:waddle_app/src/features/auth/common/toggle_button.dart';
-import 'package:waddle_app/src/features/auth/login/presentation/reset_password.dart';
+import 'package:waddle_app/src/features/auth/presentation/common/toggle_button.dart';
+import 'package:waddle_app/src/features/auth/presentation/login/reset_password.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
