@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "394413745104",
+    "project_id": "waddle-app-54cab",
+    "storage_bucket": "waddle-app-54cab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394413745104:android:b16dfb99a397387a4fcfd5",
+        "android_client_info": {
+          "package_name": "com.example.waddle_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGmkxEK7wIJrBpwUWeaw4KFLvsJSd4XlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

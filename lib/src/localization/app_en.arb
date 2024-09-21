@@ -1,0 +1,27 @@
+{
+  "@@locale": "en",
+  "appTitle": "waddle_app",
+  "email": "Email",
+  "password": "Password",
+  "login": "Login",
+  "forgotPassword": "Forgot password?",
+  "forgotYourPassword":"Forgot your password?",
+  "forgotPasswordBody":"Confirm your email and we'll send you a link to set up a new one.",
+  "resetPassword": "Reset Password",
+  "dontHaveAccount": "Don't have an account? ",
+  "signUp": "Signup",
+  "name": "Name",
+  "confirmPassword": "Confirm Password",
+  "alreadyHaveAccount": "Already have an account? ",
+  "create": "Create",
+  "privacyPolicyText": "By signing up you agree to our terms and conditions and privacy policy",
+  "emailSent":"Done, check your email for password reset link. If it is not there, please check your junk or spam mail folder.",
+
+  "emptyName": "Please enter a name",
+  "emptyEmail": "Please enter a email address",
+  "invalidEmail": "Enter a valid email address",
+  "emptyPassword": "Password cannot be empty",
+  "shortPassword": "Password must be at least 6 characters long",
+  "emptyConfirmPassword": "Confirm password cannot be empty",
+  "passwordsDoNotMatch": "Passwords do not match"
+}
