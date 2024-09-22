@@ -1,11 +1,11 @@
-// main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'settings/settings_controller.dart';
-import 'package:waddle_app/src/router.dart'; // Import the modified router
+import 'package:waddle_app/src/router/app_router.dart';
 import 'package:waddle_app/src/theme/light_theme.dart';
+import 'package:waddle_app/src/utils/extensions.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.settingsController});
@@ -26,18 +26,11 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en', '')],
-          onGenerateTitle: (BuildContext context) =>
-              AppLocalizations.of(context)!.appTitle,
-
-          // Define a light and dark color theme. Then, read the user's
-          // preferred ThemeMode (light, dark, or system default) from the
-          // SettingsController to display the correct theme.
+          onGenerateTitle: (BuildContext context) => context.loc.appTitle,
           theme: lightTheme,
           darkTheme: lightTheme,
           themeMode: settingsController.themeMode,
-
-          // Use the navigator-based routing system here.
-          initialRoute: AppRoutes.login,
+          initialRoute: AppRoutes.signup,
           onGenerateRoute: AppRoutes.generateRoute,
         );
       },

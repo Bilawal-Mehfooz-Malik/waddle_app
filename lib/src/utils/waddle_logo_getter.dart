@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-SvgPicture waddleLogo(double height, double width) {
+SizedBox waddleLogo(double height, double width) {
   const logoPath = 'assets/images/waddle_logo.svg';
-  return SvgPicture.asset(logoPath, height: height, width: width);
+  return SizedBox(
+      height: height, width: width, child: SvgPicture.asset(logoPath));
 }

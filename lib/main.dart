@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// ignore:depend_on_referenced_packages
-import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'src/app.dart';
 import 'src/settings/settings_service.dart';
@@ -20,8 +18,6 @@ void main() async {
   // This prevents a sudden theme change when the app is first displayed.
   await settingsController.loadSettings();
 
-  // turn off the # in the URLs on the web
-  usePathUrlStrategy();
   registerErrorHandlers();
   runApp(ProviderScope(child: MyApp(settingsController: settingsController)));
 }

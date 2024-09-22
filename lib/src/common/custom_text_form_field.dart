@@ -9,11 +9,9 @@ class CustomTextFormField extends StatelessWidget {
     required this.onIconTap,
     this.icon,
     this.keyboardType,
-    this.obscureText = false,
   });
 
   final IconData? icon;
-  final bool obscureText;
   final String hintText;
   final TextInputType? keyboardType;
   final TextEditingController controller;
@@ -26,7 +24,6 @@ class CustomTextFormField extends StatelessWidget {
       validator: validator,
       controller: controller,
       keyboardType: keyboardType,
-      obscureText: obscureText,
       decoration: InputDecoration(
         hintText: hintText,
         contentPadding:

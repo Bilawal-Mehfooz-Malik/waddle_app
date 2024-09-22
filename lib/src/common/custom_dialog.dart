@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:waddle_app/src/utils/extensions.dart';
 
 void showErrorDialog({
   required BuildContext context,
@@ -13,7 +13,10 @@ void showErrorDialog({
         title: Text(title),
         content: Text(content),
         actions: [
-          TextButton(onPressed: () => context.pop(), child: const Text('ok')),
+          TextButton(
+            child: Text(context.loc.ok),
+            onPressed: () => Navigator.pop(context),
+          ),
         ],
       );
     },
