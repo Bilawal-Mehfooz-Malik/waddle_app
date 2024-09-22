@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waddle_app/src/utils/extensions.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -13,9 +14,9 @@ class CustomTextFormField extends StatelessWidget {
 
   final IconData? icon;
   final String hintText;
+  final VoidCallback onIconTap;
   final TextInputType? keyboardType;
   final TextEditingController controller;
-  final VoidCallback onIconTap;
   final String? Function(String?)? validator;
 
   @override
@@ -33,7 +34,7 @@ class CustomTextFormField extends StatelessWidget {
           icon: Icon(
             icon,
             size: 20,
-            color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.5),
+            color: context.color.onSecondary.withOpacity(0.5),
           ),
         ),
       ),

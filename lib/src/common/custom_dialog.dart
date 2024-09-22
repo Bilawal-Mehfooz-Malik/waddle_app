@@ -35,7 +35,6 @@ void twoButtonDialog({
   showDialog(
     context: context,
     builder: (context) {
-      final style = Theme.of(context);
       return AlertDialog(
         title: Text(title),
         content: Text(content),
@@ -43,8 +42,7 @@ void twoButtonDialog({
           // [Left Button]
           TextButton(
             style: ButtonStyle(
-              foregroundColor:
-                  WidgetStatePropertyAll(style.colorScheme.onSurface),
+              foregroundColor: WidgetStatePropertyAll(context.color.onSurface),
             ),
             onPressed: leftButtonAction,
             child: Text(leftButtonText),

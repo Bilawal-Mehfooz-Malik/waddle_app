@@ -8,3 +8,11 @@ extension LocalizationExtension on BuildContext {
 extension ThemeExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
 }
+
+extension TextThemeExtension on BuildContext {
+  TextTheme get txtTheme => Theme.of(this).textTheme;
+}
+
+extension ColorSchemeExtension on BuildContext {
+  ColorScheme get color => Theme.of(this).colorScheme;
+}

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:waddle_app/src/common/app_sizes.dart';
 import 'package:waddle_app/src/utils/validators.dart';
-import 'package:waddle_app/src/common/custom_text_form_field.dart';
 import 'package:waddle_app/src/utils/extensions.dart';
+import 'package:waddle_app/src/common/custom_text_form_field.dart';
 
 class AccountFields extends StatelessWidget {
   final TextEditingController nameController;

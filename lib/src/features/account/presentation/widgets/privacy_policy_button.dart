@@ -19,7 +19,7 @@ class PrivacyPolicyButton extends StatelessWidget {
         Expanded(
           child: Text(
             context.loc.privacyPolicyText,
-            style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+            style: TextStyle(color: context.color.onSurface),
           ),
         ),
       ],

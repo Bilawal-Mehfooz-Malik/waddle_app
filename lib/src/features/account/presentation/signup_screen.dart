@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:waddle_app/src/common/app_sizes.dart';
+import 'package:waddle_app/src/utils/extensions.dart';
 import 'package:waddle_app/src/common/custom_dialog.dart';
 import 'package:waddle_app/src/utils/waddle_logo_getter.dart';
 import 'package:waddle_app/src/features/account/presentation/widgets/headline.dart';
-import 'package:waddle_app/src/utils/extensions.dart';
 import 'package:waddle_app/src/features/account/presentation/widgets/account_fields.dart';
 import 'package:waddle_app/src/features/account/presentation/widgets/privacy_policy_button.dart';
 

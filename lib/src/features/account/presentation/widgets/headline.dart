@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waddle_app/src/utils/extensions.dart';
 
 class HeadlineWidget extends StatelessWidget {
   const HeadlineWidget({super.key, required this.text});
@@ -7,15 +8,13 @@ class HeadlineWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = Theme.of(context);
-
     // [Returning widget]
-    return _buildHeadline(context, style);
+    return _buildHeadline(context);
   }
 
-  Align _buildHeadline(BuildContext context, ThemeData style) {
+  Align _buildHeadline(BuildContext context) {
     final txtStyle =
-        style.textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.bold);
+        context.txtTheme.headlineMedium!.copyWith(fontWeight: FontWeight.bold);
 
     return Align(
       alignment: Alignment.centerLeft,
