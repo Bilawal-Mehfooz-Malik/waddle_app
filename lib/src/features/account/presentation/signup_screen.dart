@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:waddle_app/src/common/app_sizes.dart';
-import 'package:waddle_app/src/common/custom_loading.dart';
 import 'package:waddle_app/src/utils/extensions.dart';
 import 'package:waddle_app/src/router/app_router.dart';
 import 'package:waddle_app/src/common/custom_dialog.dart';
+import 'package:waddle_app/src/common/custom_loading.dart';
 import 'package:waddle_app/src/utils/waddle_logo_getter.dart';
 import 'package:waddle_app/src/features/account/model/app_user.dart';
 import 'package:waddle_app/src/features/account/data/account_repository.dart';
@@ -64,7 +64,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const Spacer(),
 
                         // [Logo]
-                        waddleLogo(200, 200),
+                        waddleLogo(220, 220),
 
                         // [Headline]
                         HeadlineWidget(text: context.loc.signUp),
@@ -143,7 +143,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     result.fold(
       (error) => showCustomSnack(context, error),
-      (_) => Navigator.pushReplacementNamed(context, AppRoutes.home),
+      (_) => Navigator.pushReplacementNamed(context, AppRoutes.getStarted),
     );
   }
 }

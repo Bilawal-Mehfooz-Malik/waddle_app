@@ -44,6 +44,9 @@ ThemeData lightTheme = ThemeData(
     titleLarge: TextStyle(color: onSurfaceColor),
     titleMedium: TextStyle(color: onSurfaceColor),
     titleSmall: TextStyle(color: onSurfaceColor),
+    bodyLarge: TextStyle(color: onSurfaceColor),
+    bodyMedium: TextStyle(color: onSurfaceColor),
+    bodySmall: TextStyle(color: onSurfaceColor),
   ),
   // Elevated Button Theme
   elevatedButtonTheme: const ElevatedButtonThemeData(

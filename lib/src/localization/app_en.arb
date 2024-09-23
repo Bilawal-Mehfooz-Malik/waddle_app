@@ -11,5 +11,9 @@
   "emptyEmail": "Please enter a email address",
   "invalidEmail": "Enter a valid email address",
 
+  "getStarted": "Get Started",
+  "getStartedBody": "Congrats on taking the first step! Your digital detox journey starts now.",
+  "letsGo":"Let's Go",
+
   "ok":"ok"
 }
