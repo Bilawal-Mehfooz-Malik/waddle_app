@@ -9,7 +9,7 @@ class PrivacyPolicyButton extends StatelessWidget {
   });
 
   final bool isChecked;
-  final void Function(bool? value) onCheck;
+  final void Function(bool? value)? onCheck;
 
   @override
   Widget build(BuildContext context) {

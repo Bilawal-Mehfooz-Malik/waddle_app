@@ -2,9 +2,8 @@
   "@@locale": "en",
   "appTitle": "waddle_app",
   "email": "Email",
-  "signUp": "Signup",
+  "signUp": "Sign up",
   "name": "Name",
-  "create": "Create",
   "privacyPolicyText": "By signing up you agree to our terms and conditions and privacy policy",
   "emailSent":"Done, check your email for password reset link. If it is not there, please check your junk or spam mail folder.",
 

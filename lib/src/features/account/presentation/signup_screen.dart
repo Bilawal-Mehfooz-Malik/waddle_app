@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:waddle_app/src/common/app_sizes.dart';
+import 'package:waddle_app/src/common/custom_loading.dart';
 import 'package:waddle_app/src/utils/extensions.dart';
+import 'package:waddle_app/src/router/app_router.dart';
 import 'package:waddle_app/src/common/custom_dialog.dart';
 import 'package:waddle_app/src/utils/waddle_logo_getter.dart';
+import 'package:waddle_app/src/features/account/model/app_user.dart';
+import 'package:waddle_app/src/features/account/data/account_repository.dart';
 import 'package:waddle_app/src/features/account/presentation/widgets/headline.dart';
 import 'package:waddle_app/src/features/account/presentation/widgets/account_fields.dart';
 import 'package:waddle_app/src/features/account/presentation/widgets/privacy_policy_button.dart';
@@ -17,6 +22,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   bool _isChecked = false;
+  bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -46,44 +52,62 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
-              child: Container(
-                height: constraints.maxHeight,
-                padding: const EdgeInsets.all(Sizes.p16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // [Logo]
-                    waddleLogo(240, 240),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Padding(
+                    padding: const EdgeInsets.all(Sizes.p16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Spacer(),
 
-                    // [Headline]
-                    HeadlineWidget(text: context.loc.signUp),
-                    gapH48,
+                        // [Logo]
+                        waddleLogo(200, 200),
 
-                    // [All Text Form Fields]
-                    Form(
-                      key: _formKey,
-                      child: AccountFields(
-                        nameController: _nameController,
-                        emailController: _emailController,
-                      ),
+                        // [Headline]
+                        HeadlineWidget(text: context.loc.signUp),
+                        gapH48,
+
+                        // [All Text Form Fields]
+                        Form(
+                          key: _formKey,
+                          child: AccountFields(
+                            isLoading: _isLoading,
+                            nameController: _nameController,
+                            emailController: _emailController,
+                          ),
+                        ),
+                        gapH32,
+
+                        // Check Box [Accept Terms and Policy Button]
+                        PrivacyPolicyButton(
+                          isChecked: _isChecked,
+                          onCheck: _isLoading
+                              ? null
+                              : (_) => setState(() {
+                                    _isChecked = !_isChecked;
+                                  }),
+                        ),
+                        gapH32,
+
+                        // [Sign Up Button]
+                        Consumer(
+                          builder: (context, ref, child) {
+                            return ElevatedButton(
+                              onPressed: _isLoading ? null : () => _signUp(ref),
+                              child: _isLoading
+                                  ? CustomLoading(
+                                      color: context.color.onPrimary)
+                                  : Text(context.loc.signUp),
+                            );
+                          },
+                        ),
+                        const Spacer(flex: 4),
+                      ],
                     ),
-                    gapH24,
-
-                    // Check Box [Accept Terms and Policy Button]
-                    PrivacyPolicyButton(
-                      isChecked: _isChecked,
-                      onCheck: (value) {
-                        setState(() => _isChecked = !_isChecked);
-                      },
-                    ),
-                    gapH24,
-
-                    // [Sign Up Button]
-                    ElevatedButton(
-                      onPressed: _signUp,
-                      child: Text(context.loc.create),
-                    )
-                  ],
+                  ),
                 ),
               ),
             );
@@ -93,19 +117,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  void _signUp() {
-    if (_formKey.currentState!.validate() && _isChecked) {
-      showErrorDialog(
-          context: context, title: 'Signup', content: 'Implement signup logic');
-      return;
-    } else if (!_formKey.currentState!.validate()) {
-      return;
-    } else if (!_isChecked) {
+  void _toggleLoading() => setState(() => _isLoading = !_isLoading);
+
+  void _signUp(WidgetRef ref) async {
+    if (!_formKey.currentState!.validate()) return;
+
+    if (!_isChecked) {
       showErrorDialog(
         context: context,
-        title: 'Accept Agreement',
-        content: 'Please accept liscence and agreements in order to continue',
+        title: 'Accept Agreement'.hardcoded,
+        content:
+            'Please accept the license and agreements to continue.'.hardcoded,
       );
+      return;
     }
+
+    _toggleLoading();
+
+    final provider = ref.read(accountRepositoryProvider);
+    final result = await provider.createUser(
+      AppUser(name: _nameController.text, email: _emailController.text),
+    );
+
+    _toggleLoading();
+
+    result.fold(
+      (error) => showCustomSnack(context, error),
+      (_) => Navigator.pushReplacementNamed(context, AppRoutes.home),
+    );
   }
 }

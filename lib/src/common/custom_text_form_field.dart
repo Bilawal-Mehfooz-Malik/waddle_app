@@ -7,14 +7,16 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     required this.controller,
     required this.validator,
-    required this.onIconTap,
     this.icon,
+    this.onIconTap,
     this.keyboardType,
+    this.readOnly = false,
   });
 
   final IconData? icon;
+  final bool readOnly;
   final String hintText;
-  final VoidCallback onIconTap;
+  final VoidCallback? onIconTap;
   final TextInputType? keyboardType;
   final TextEditingController controller;
   final String? Function(String?)? validator;
@@ -22,6 +24,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly,
       validator: validator,
       controller: controller,
       keyboardType: keyboardType,
