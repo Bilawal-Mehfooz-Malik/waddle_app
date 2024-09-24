@@ -86,4 +86,14 @@ ThemeData lightTheme = ThemeData(
     focusedErrorBorder: _getBorder(errorColor),
     hintStyle: const TextStyle(color: lightGrey, fontWeight: FontWeight.normal),
   ),
+
+  // dialog theme
+  dialogTheme: const DialogTheme(
+    titleTextStyle: TextStyle(
+      fontSize: 22,
+      color: onSecondaryColor,
+      fontWeight: FontWeight.bold,
+    ),
+    contentTextStyle: TextStyle(color: lightGrey),
+  ),
 );

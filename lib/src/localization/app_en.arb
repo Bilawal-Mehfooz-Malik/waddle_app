@@ -5,7 +5,8 @@
   "signUp": "Sign up",
   "name": "Name",
   "privacyPolicyText": "By signing up you agree to our terms and conditions and privacy policy",
-  "emailSent":"Done, check your email for password reset link. If it is not there, please check your junk or spam mail folder.",
+  "liscenceText":"Please accept the license agreement to continue",
+  "acceptAgreement":"Accept Agreement",
 
   "emptyName": "Please enter a name",
   "emptyEmail": "Please enter a email address",

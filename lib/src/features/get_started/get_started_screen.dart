@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:waddle_app/src/common/app_sizes.dart';
 import 'package:waddle_app/src/router/app_router.dart';
 import 'package:waddle_app/src/utils/extensions.dart';
@@ -10,40 +11,52 @@ class GetStartedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.color.primary,
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final isLandscape = constraints.maxWidth > constraints.maxHeight;
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Background Image
+          SvgPicture.asset(
+            'assets/images/get_started_bg.svg',
+            fit: BoxFit.cover,
+          ),
+          // Existing Content
+          SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isLandscape =
+                    constraints.maxWidth > constraints.maxHeight;
 
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: Sizes.p16),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                  child: IntrinsicHeight(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        if (!isLandscape) const Spacer(),
-                        waddleLogo(220, 220),
-                        gapH32,
-                        _buildHeadline(context),
-                        gapH24,
-                        _buildBodyText(context),
-                        if (isLandscape) gapH16,
-                        if (!isLandscape) const Spacer(),
-                        _buildLetsGoButton(context),
-                        if (isLandscape) gapH16,
-                        if (!isLandscape) const Spacer(flex: 2),
-                      ],
+                return SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: Sizes.p16),
+                    child: ConstrainedBox(
+                      constraints:
+                          BoxConstraints(minHeight: constraints.maxHeight),
+                      child: IntrinsicHeight(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            if (!isLandscape) const Spacer(),
+                            waddleLogo(220, 220),
+                            gapH32,
+                            _buildHeadline(context),
+                            gapH24,
+                            _buildBodyText(context),
+                            if (isLandscape) gapH16,
+                            if (!isLandscape) const Spacer(),
+                            _buildLetsGoButton(context),
+                            if (isLandscape) gapH16,
+                            if (!isLandscape) const Spacer(flex: 2),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            );
-          },
-        ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

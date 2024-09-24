@@ -125,9 +125,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (!_isChecked) {
       showErrorDialog(
         context: context,
-        title: 'Accept Agreement'.hardcoded,
-        content:
-            'Please accept the license and agreements to continue.'.hardcoded,
+        title: context.loc.acceptAgreement,
+        content: context.loc.liscenceText,
       );
       return;
     }
