@@ -4,6 +4,7 @@ const Color lightGrey = Color.fromRGBO(127, 127, 127, 1.0);
 const Color darkGrey = Color.fromRGBO(133, 133, 151, 1.0);
 const Color fillColor = Color.fromRGBO(205, 205, 205, 0.2);
 const Color successGreen = Color.fromRGBO(66, 208, 0, 1.0);
+const Color lightBottomNavColor = Color.fromRGBO(228, 228, 228, 1);
 
 const Color primaryColor = Color.fromRGBO(112, 135, 255, 1.0);
 const Color onPrimaryColor = Colors.white;
@@ -31,11 +32,11 @@ ThemeData lightTheme = ThemeData(
     primary: primaryColor,
     onPrimary: onPrimaryColor,
     secondary: secondaryColor,
-    onSecondary: lightGrey,
+    onSecondary: onSecondaryColor,
     error: errorColor,
     onError: onErrorColor,
     surface: surfaceColor,
-    onSurface: darkGrey,
+    onSurface: onSurfaceColor,
   ),
 
   // Text Theme
@@ -95,5 +96,15 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
     contentTextStyle: TextStyle(color: lightGrey),
+  ),
+
+  // [Navigation bar theme]
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    elevation: 0,
+    showSelectedLabels: false,
+    showUnselectedLabels: false,
+    backgroundColor: lightBottomNavColor,
+    selectedIconTheme: IconThemeData(color: primaryColor, size: 35),
+    unselectedIconTheme: IconThemeData(color: onSecondaryColor, size: 35),
   ),
 );

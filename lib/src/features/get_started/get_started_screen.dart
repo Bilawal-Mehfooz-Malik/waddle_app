@@ -87,7 +87,8 @@ class GetStartedScreen extends StatelessWidget {
         foregroundColor: context.color.primary,
       ),
       child: Text(context.loc.letsGo),
-      onPressed: () => Navigator.pushReplacementNamed(context, AppRoutes.home),
+      onPressed: () =>
+          Navigator.pushReplacementNamed(context, AppRoutes.navScaffold),
     );
   }
 }
