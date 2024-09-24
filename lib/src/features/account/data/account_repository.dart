@@ -23,30 +23,42 @@ class AccountRepository {
             .hardcoded,
       );
     }
+
     try {
-      // Add user data to Firestore (without the id)
-      DocumentReference docRef =
-          await firestore.collection(collectionUsers).add(user.toMap());
-
-      // Retrieve the document ID and update the user object
-      user.id = docRef.id;
-
-      // Update the user document with the new id field
-      await firestore
-          .collection(collectionUsers)
-          .doc(user.id)
-          .update({'id': user.id});
-
-      // Store user creation status locally
-      await _storeUserCreationStatus();
-
-      // Return the updated user with the document ID assigned
-      return Right(user);
+      // Use Future.timeout to enforce a 10-second timeout
+      return await Future.any([
+        Future.delayed(const Duration(seconds: 10), () {
+          return Left('Connection timed out. please try again'.hardcoded);
+        }),
+        _createUserInFirestore(user)
+      ]);
     } on FirebaseException catch (e) {
       return Left(FirestoreFailure.fromCode(e.code).message);
     } catch (e) {
       return Left('An unexpected error occurred: $e'.hardcoded);
     }
+  }
+
+  // Helper function to handle the user creation process
+  Future<Either<String, AppUser>> _createUserInFirestore(AppUser user) async {
+    // Add user data to Firestore (without the id)
+    DocumentReference docRef =
+        await firestore.collection(collectionUsers).add(user.toMap());
+
+    // Retrieve the document ID and update the user object
+    user.id = docRef.id;
+
+    // Update the user document with the new id field
+    await firestore
+        .collection(collectionUsers)
+        .doc(user.id)
+        .update({'id': user.id});
+
+    // Store user creation status locally
+    await _storeUserCreationStatus();
+
+    // Return the updated user with the document ID assigned
+    return Right(user);
   }
 
   Future<void> _storeUserCreationStatus() async {
