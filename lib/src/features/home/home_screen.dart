@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:waddle_app/src/theme/theme_controller.dart';
 import 'package:waddle_app/src/features/home/presentation/name_controller.dart';
+import 'package:waddle_app/src/utils/extensions.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -9,20 +10,21 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: _buildAppBar(ref),
+      appBar: _buildAppBar(ref, context),
       body: const Center(child: Text('Home Screen')),
     );
   }
 
-  AppBar _buildAppBar(WidgetRef ref) {
+  AppBar _buildAppBar(WidgetRef ref, BuildContext context) {
     final userNameValue = ref.watch(nameProvider);
     final themeMode = ref.watch(themeModeProvider);
     final themeNotifier = ref.read(themeModeProvider.notifier);
+    final hi = context.loc.hi;
 
     return AppBar(
       title: userNameValue.when(
         data: (name) => Text(
-          'Hi, $name!',
+          '$hi$name!',
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         error: (error, _) => Text(error.toString()),

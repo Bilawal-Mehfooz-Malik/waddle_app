@@ -9,12 +9,12 @@ import 'package:waddle_app/src/utils/network_status.dart';
 import 'package:waddle_app/src/features/account/model/app_user.dart';
 
 class AccountRepository {
-  final FirebaseFirestore firestore;
-  AccountRepository(this.firestore);
+  final FirebaseFirestore _firestore;
+  AccountRepository(this._firestore);
 
-  static const String collectionUsers = 'users';
-  static const String userCreated = 'isUserCreated';
-  static const String userName = 'userName';
+  static const String _collectionUsers = 'users';
+  static const String _userCreated = 'isUserCreated';
+  static const String _userName = 'userName';
 
   Future<Either<String, AppUser>> createUser(AppUser user) async {
     // Check for internet connectivity
@@ -43,14 +43,14 @@ class AccountRepository {
   Future<Either<String, AppUser>> _createUserInFirestore(AppUser user) async {
     // Add user data to Firestore (without the id)
     DocumentReference docRef =
-        await firestore.collection(collectionUsers).add(user.toMap());
+        await _firestore.collection(_collectionUsers).add(user.toMap());
 
     // Retrieve the document ID and update the user object
     user.id = docRef.id;
 
     // Update the user document with the new id field
-    await firestore
-        .collection(collectionUsers)
+    await _firestore
+        .collection(_collectionUsers)
         .doc(user.id)
         .update({'id': user.id});
 
@@ -63,18 +63,18 @@ class AccountRepository {
 
   Future<void> _storeUserCreationStatus(String name) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(userCreated, true);
-    await prefs.setString(userName, name);
+    await prefs.setBool(_userCreated, true);
+    await prefs.setString(_userName, name);
   }
 
   Future<bool> isUserCreated() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(userCreated) ?? false;
+    return prefs.getBool(_userCreated) ?? false;
   }
 
   Future<String> getUserName() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(userName) ?? '';
+    return prefs.getString(_userName) ?? '';
   }
 }
 
@@ -82,7 +82,6 @@ final accountRepositoryProvider = Provider<AccountRepository>((ref) {
   return AccountRepository(FirebaseFirestore.instance);
 });
 
-// FutureProvider to check if the user is created
 final userStatusProvider = FutureProvider<bool>((ref) async {
   final accountRepository = ref.watch(accountRepositoryProvider);
   return await accountRepository.isUserCreated();

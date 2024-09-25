@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waddle_app/src/utils/extensions.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -6,12 +7,17 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: const Text(
-        'Profile',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      )),
+      appBar: _buildAppBar(context),
       body: const Center(child: Text('Profile Screen')),
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      title: Text(
+        context.loc.profile,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
     );
   }
 }
