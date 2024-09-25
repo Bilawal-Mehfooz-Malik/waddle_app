@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const Color lightGrey = Color.fromRGBO(127, 127, 127, 1.0);
 const Color darkGrey = Color.fromRGBO(133, 133, 151, 1.0);
@@ -40,15 +41,16 @@ ThemeData lightTheme = ThemeData(
   ),
 
   // Text Theme
-  textTheme: const TextTheme(
-    headlineMedium: TextStyle(color: onSurfaceColor),
-    titleLarge: TextStyle(color: onSurfaceColor),
-    titleMedium: TextStyle(color: onSurfaceColor),
-    titleSmall: TextStyle(color: onSurfaceColor),
-    bodyLarge: TextStyle(color: onSurfaceColor),
-    bodyMedium: TextStyle(color: onSurfaceColor),
-    bodySmall: TextStyle(color: onSurfaceColor),
+  textTheme: TextTheme(
+    headlineMedium: GoogleFonts.inter(color: onSurfaceColor),
+    titleLarge: GoogleFonts.inter(color: onSurfaceColor),
+    titleMedium: GoogleFonts.inter(color: onSurfaceColor),
+    titleSmall: GoogleFonts.inter(color: onSurfaceColor),
+    bodyLarge: GoogleFonts.inter(color: onSurfaceColor),
+    bodyMedium: GoogleFonts.inter(color: onSurfaceColor),
+    bodySmall: GoogleFonts.inter(color: onSurfaceColor),
   ),
+
   // Elevated Button Theme
   elevatedButtonTheme: const ElevatedButtonThemeData(
     style: ButtonStyle(

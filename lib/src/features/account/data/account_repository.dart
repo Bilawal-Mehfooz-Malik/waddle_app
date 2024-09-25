@@ -14,6 +14,7 @@ class AccountRepository {
 
   static const String collectionUsers = 'users';
   static const String userCreated = 'isUserCreated';
+  static const String userName = 'userName';
 
   Future<Either<String, AppUser>> createUser(AppUser user) async {
     // Check for internet connectivity
@@ -55,20 +56,26 @@ class AccountRepository {
         .update({'id': user.id});
 
     // Store user creation status locally
-    await _storeUserCreationStatus();
+    await _storeUserCreationStatus(user.name);
 
     // Return the updated user with the document ID assigned
     return Right(user);
   }
 
-  Future<void> _storeUserCreationStatus() async {
+  Future<void> _storeUserCreationStatus(String name) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(userCreated, true);
+    await prefs.setString(userName, name);
   }
 
   Future<bool> isUserCreated() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool(userCreated) ?? false;
+  }
+
+  Future<String> getUserName() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(userName) ?? '';
   }
 }
 
@@ -80,4 +87,10 @@ final accountRepositoryProvider = Provider<AccountRepository>((ref) {
 final userStatusProvider = FutureProvider<bool>((ref) async {
   final accountRepository = ref.watch(accountRepositoryProvider);
   return await accountRepository.isUserCreated();
+});
+
+// user name future provider
+final userNameProvider = FutureProvider<String>((ref) async {
+  final accountRepository = ref.watch(accountRepositoryProvider);
+  return await accountRepository.getUserName();
 });

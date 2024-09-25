@@ -34,7 +34,7 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
     );
 
     return Scaffold(
-      body: SafeArea(child: _screens[_currentIndex]),
+      body: _screens[_currentIndex],
       bottomNavigationBar: Container(
         decoration: boxDecoration,
         padding: const EdgeInsets.symmetric(vertical: Sizes.p8),
