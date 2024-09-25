@@ -26,13 +26,12 @@ class AccountRepository {
     }
 
     try {
-      // Use Future.timeout to enforce a 10-second timeout
-      return await Future.any([
-        Future.delayed(const Duration(seconds: 10), () {
-          return Left('Connection timed out. please try again'.hardcoded);
-        }),
-        _createUserInFirestore(user)
-      ]);
+      return await _createUserInFirestore(user).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          return Left('Connection timed out. Please try again'.hardcoded);
+        },
+      );
     } on FirebaseException catch (e) {
       return Left(FirestoreFailure.fromCode(e.code).message);
     } catch (e) {
@@ -87,10 +86,4 @@ final accountRepositoryProvider = Provider<AccountRepository>((ref) {
 final userStatusProvider = FutureProvider<bool>((ref) async {
   final accountRepository = ref.watch(accountRepositoryProvider);
   return await accountRepository.isUserCreated();
-});
-
-// user name future provider
-final userNameProvider = FutureProvider<String>((ref) async {
-  final accountRepository = ref.watch(accountRepositoryProvider);
-  return await accountRepository.getUserName();
 });
