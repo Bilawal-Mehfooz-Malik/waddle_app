@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:waddle_app/src/common/app_sizes.dart';
 import 'package:waddle_app/src/theme/light_theme.dart';
 import 'package:waddle_app/src/features/add/add_screen.dart';
-import 'package:waddle_app/src/features/home/home_screen.dart';
 import 'package:waddle_app/src/features/profile/profile_screen.dart';
+import 'package:waddle_app/src/features/home/presentation/home_screen.dart';
 
 class ScaffoldWithNavBar extends StatefulWidget {
   const ScaffoldWithNavBar({super.key});

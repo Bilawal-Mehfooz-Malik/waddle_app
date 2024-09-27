@@ -12,11 +12,12 @@ class AccountRepository {
   final FirebaseFirestore _firestore;
   AccountRepository(this._firestore);
 
-  static const String _collectionUsers = 'users';
-  static const String _userCreated = 'isUserCreated';
-  static const String _userName = 'userName';
+  static const String collectionUsers = 'users';
+  static const String userCreated = 'isUserCreated';
+  static const String userName = 'userName';
 
-  Future<Either<String, AppUser>> createUser(AppUser user) async {
+  Future<Either<String, AppUser>> createUser(
+      AppUser user, WidgetRef ref) async {
     // Check for internet connectivity
     if (!await networkStatus()) {
       return Left(
@@ -26,7 +27,7 @@ class AccountRepository {
     }
 
     try {
-      return await _createUserInFirestore(user).timeout(
+      return await _createUserInFirestore(user, ref).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
           return Left('Connection timed out. Please try again'.hardcoded);
@@ -40,22 +41,25 @@ class AccountRepository {
   }
 
   // Helper function to handle the user creation process
-  Future<Either<String, AppUser>> _createUserInFirestore(AppUser user) async {
+  Future<Either<String, AppUser>> _createUserInFirestore(
+      AppUser user, WidgetRef ref) async {
     // Add user data to Firestore (without the id)
     DocumentReference docRef =
-        await _firestore.collection(_collectionUsers).add(user.toMap());
+        await _firestore.collection(collectionUsers).add(user.toMap());
 
     // Retrieve the document ID and update the user object
     user.id = docRef.id;
 
     // Update the user document with the new id field
     await _firestore
-        .collection(_collectionUsers)
+        .collection(collectionUsers)
         .doc(user.id)
         .update({'id': user.id});
 
     // Store user creation status locally
     await _storeUserCreationStatus(user.name);
+
+    ref.invalidate(userNameProvider);
 
     // Return the updated user with the document ID assigned
     return Right(user);
@@ -63,18 +67,18 @@ class AccountRepository {
 
   Future<void> _storeUserCreationStatus(String name) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_userCreated, true);
-    await prefs.setString(_userName, name);
+    await prefs.setBool(userCreated, true);
+    await prefs.setString(userName, name);
   }
 
   Future<bool> isUserCreated() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_userCreated) ?? false;
+    return prefs.getBool(userCreated) ?? false;
   }
 
   Future<String> getUserName() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(_userName) ?? '';
+    return prefs.getString(userName) ?? '';
   }
 }
 
@@ -85,4 +89,9 @@ final accountRepositoryProvider = Provider<AccountRepository>((ref) {
 final userStatusProvider = FutureProvider<bool>((ref) async {
   final accountRepository = ref.watch(accountRepositoryProvider);
   return await accountRepository.isUserCreated();
+});
+
+final userNameProvider = FutureProvider<String>((ref) async {
+  final accountRepository = ref.watch(accountRepositoryProvider);
+  return accountRepository.getUserName();
 });

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:waddle_app/src/utils/extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:waddle_app/src/theme/theme_controller.dart';
-import 'package:waddle_app/src/features/home/presentation/name_controller.dart';
-import 'package:waddle_app/src/utils/extensions.dart';
+import 'package:waddle_app/src/features/account/data/account_repository.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -16,32 +16,39 @@ class HomeScreen extends ConsumerWidget {
   }
 
   AppBar _buildAppBar(WidgetRef ref, BuildContext context) {
-    final userNameValue = ref.watch(nameProvider);
+    final userNameValue = ref.watch(userNameProvider);
     final themeMode = ref.watch(themeModeProvider);
     final themeNotifier = ref.read(themeModeProvider.notifier);
     final hi = context.loc.hi;
 
     return AppBar(
-      title: userNameValue.when(
-        data: (name) => Text(
-          '$hi$name!',
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        error: (error, _) => Text(error.toString()),
-        loading: () => const CircularProgressIndicator(),
-      ),
-      actions: [
-        IconButton(
-          icon: _getThemeIcon(themeMode),
-          onPressed: () => _onPressed(themeNotifier, themeMode),
-        ),
-      ],
+      title: _buildUserNameTitle(userNameValue, hi),
+      actions: [_buildThemeToggleIcon(themeMode, themeNotifier)],
     );
   }
 
-  void _onPressed(ThemeController notifier, ThemeMode themeMode) {
+  Widget _buildUserNameTitle(AsyncValue<String> userNameValue, String hi) {
+    return userNameValue.when(
+      data: (name) => Text(
+        '$hi$name!',
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+      error: (error, _) => Text(error.toString()),
+      loading: () => const CircularProgressIndicator(),
+    );
+  }
+
+  Widget _buildThemeToggleIcon(ThemeMode themeMode, ThemeController notifier) {
+    return IconButton(
+      icon: _getThemeIcon(themeMode),
+      onPressed: () => _toggleTheme(notifier, themeMode),
+    );
+  }
+
+  void _toggleTheme(ThemeController notifier, ThemeMode themeMode) {
     notifier.updateThemeMode(
-        themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark);
+      themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark,
+    );
   }
 
   Icon _getThemeIcon(ThemeMode themeMode) {

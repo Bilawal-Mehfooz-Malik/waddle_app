@@ -135,8 +135,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     final provider = ref.read(accountRepositoryProvider);
     final result = await provider.createUser(
-      AppUser(name: _nameController.text, email: _emailController.text),
-    );
+        AppUser(name: _nameController.text, email: _emailController.text), ref);
 
     _toggleLoading();
 
