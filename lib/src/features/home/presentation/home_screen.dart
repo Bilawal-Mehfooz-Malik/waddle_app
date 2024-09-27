@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waddle_app/src/features/home/presentation/widgets/home_body.dart';
 import 'package:waddle_app/src/utils/extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:waddle_app/src/theme/theme_controller.dart';
@@ -11,7 +12,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: _buildAppBar(ref, context),
-      body: const Center(child: Text('Home Screen')),
+      body: const HomeBody(),
     );
   }
 

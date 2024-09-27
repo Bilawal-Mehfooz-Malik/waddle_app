@@ -1,16 +1,64 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:waddle_app/src/common/app_sizes.dart';
+import 'package:waddle_app/src/features/home/presentation/widgets/custom_segment_button.dart';
+import 'package:waddle_app/src/utils/extensions.dart';
 
-// class HomeBody extends StatelessWidget {
-//   const HomeBody({super.key});
+enum ViewType { steps, scrolling }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
+class HomeBody extends StatelessWidget {
+  const HomeBody({super.key});
 
-//       padding: const EdgeInsets.all(),
-//       child: Column(
-//         children: [],
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(Sizes.p16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TimeSection(),
+          gapH16,
+          CustomSegmentedButton(),
+        ],
+      ),
+    );
+  }
+}
+
+class TimeSection extends StatelessWidget {
+  const TimeSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        _buildHourGlass(context),
+        gapH8,
+        Text(context.loc.unlocked, style: context.txtTheme.titleLarge),
+        gapH4,
+        _buildMinutesText(context),
+      ],
+    );
+  }
+
+  Container _buildHourGlass(BuildContext context) {
+    return Container(
+      width: 110,
+      height: 110,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: context.color.secondary.withOpacity(0.2),
+      ),
+      child: const Icon(Icons.hourglass_top, size: 40),
+    );
+  }
+
+  Text _buildMinutesText(BuildContext context) {
+    // TODO: Implement minutes from realtime
+    return Text(
+      '40 ${context.loc.minutes}',
+      style: context.txtTheme.titleMedium!
+          .copyWith(color: context.color.onSecondary.withOpacity(0.5)),
+    );
+  }
+}
