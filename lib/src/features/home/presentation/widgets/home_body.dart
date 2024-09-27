@@ -1,64 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:waddle_app/src/common/app_sizes.dart';
-import 'package:waddle_app/src/features/home/presentation/widgets/custom_segment_button.dart';
+import 'package:waddle_app/src/features/home/presentation/controllers/home_view_controller.dart';
+import 'package:waddle_app/src/features/home/presentation/widgets/time_section.dart';
+import 'package:waddle_app/src/features/home/presentation/widgets/segmented_section.dart';
 import 'package:waddle_app/src/utils/extensions.dart';
 
-enum ViewType { steps, scrolling }
-
-class HomeBody extends StatelessWidget {
+class HomeBody extends ConsumerWidget {
   const HomeBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(Sizes.p16),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final homeView = ref.watch(homeViewProvider);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: Sizes.p16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          TimeSection(),
-          gapH16,
-          CustomSegmentedButton(),
+          const TimeSection(),
+          gapH24,
+          const SegmentedSection(),
+          gapH24,
+          const DateSection(),
+          gapH12,
+          if (homeView == HomeView.steps) const Expanded(child: Placeholder()),
+          if (homeView == HomeView.scrolling)
+            const Expanded(child: Placeholder()),
+          gapH8,
         ],
       ),
     );
   }
 }
 
-class TimeSection extends StatelessWidget {
-  const TimeSection({super.key});
+class DateSection extends StatelessWidget {
+  const DateSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildHourGlass(context),
-        gapH8,
-        Text(context.loc.unlocked, style: context.txtTheme.titleLarge),
-        gapH4,
-        _buildMinutesText(context),
+        _leftSection(context),
+        _rightDropdownButton(),
       ],
     );
   }
 
-  Container _buildHourGlass(BuildContext context) {
-    return Container(
-      width: 110,
-      height: 110,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: context.color.secondary.withOpacity(0.2),
-      ),
-      child: const Icon(Icons.hourglass_top, size: 40),
+  Column _leftSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Today'.hardcoded,
+          style: context.txtTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.bold,
+            color: context.color.onSurface.withOpacity(0.5),
+          ),
+        ),
+        Text(
+          'Thu, 08 July'.hardcoded,
+          style: context.txtTheme.headlineSmall,
+        ),
+      ],
     );
   }
 
-  Text _buildMinutesText(BuildContext context) {
-    // TODO: Implement minutes from realtime
-    return Text(
-      '40 ${context.loc.minutes}',
-      style: context.txtTheme.titleMedium!
-          .copyWith(color: context.color.onSecondary.withOpacity(0.5)),
-    );
+  Widget _rightDropdownButton() {
+    return Text('Today'.hardcoded);
   }
 }
