@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:waddle_app/src/common/app_sizes.dart';
 import 'package:waddle_app/src/utils/extensions.dart';
+import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 
 enum HomeView { steps, scrolling }
 
@@ -22,21 +23,22 @@ class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(25),
-        child: CupertinoSlidingSegmentedControl<HomeView>(
-          backgroundColor: context.color.secondary.withOpacity(0.5),
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.p12,
-            vertical: Sizes.p4,
-          ),
+    final radius = BorderRadius.circular(25);
 
-          // [Main Widgets]
-          groupValue: _selectedSegment,
-          onValueChanged: _onChanged,
-          children: _buildChildrens(context),
+    return Center(
+      child: CustomSlidingSegmentedControl(
+        decoration: BoxDecoration(
+          borderRadius: radius,
+          color: context.color.secondary.withOpacity(0.5),
         ),
+        thumbDecoration: BoxDecoration(
+          borderRadius: radius,
+          color: context.color.onPrimary,
+        ),
+
+        // [Main Widgets]
+        onValueChanged: _onChanged,
+        children: _buildChildrens(context),
       ),
     );
   }
@@ -54,16 +56,13 @@ class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
     final color =
         isSelected ? context.color.secondary : context.color.onSecondary;
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(25),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-            vertical: Sizes.p4, horizontal: Sizes.p8),
-        child: Text(
-          text,
-          style: context.txtTheme.bodyLarge!
-              .copyWith(fontWeight: FontWeight.bold, color: color),
-        ),
+    return Padding(
+      padding:
+          const EdgeInsets.symmetric(vertical: Sizes.p4, horizontal: Sizes.p12),
+      child: Text(
+        text,
+        style: context.txtTheme.bodyLarge!
+            .copyWith(fontWeight: FontWeight.bold, color: color),
       ),
     );
   }
