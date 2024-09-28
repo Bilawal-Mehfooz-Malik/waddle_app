@@ -9,12 +9,15 @@ class DateSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        _leftSection(context),
-        _rightDropdownButton(context, ref),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: Sizes.p16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _leftSection(context),
+          _rightDropdownButton(context, ref),
+        ],
+      ),
     );
   }
 

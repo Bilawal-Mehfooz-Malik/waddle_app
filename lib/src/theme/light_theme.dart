@@ -48,7 +48,8 @@ ThemeData lightTheme = ThemeData(
         GoogleFonts.inter(color: onSurfaceColor, fontWeight: FontWeight.w700),
     titleLarge:
         GoogleFonts.inter(color: onSurfaceColor, fontWeight: FontWeight.w700),
-    titleMedium: GoogleFonts.inter(color: onSurfaceColor),
+    titleMedium:
+        GoogleFonts.inter(color: onSurfaceColor, fontWeight: FontWeight.w700),
     titleSmall: GoogleFonts.inter(color: onSurfaceColor),
     bodyLarge: GoogleFonts.inter(color: onSurfaceColor),
     bodyMedium: GoogleFonts.inter(color: onSurfaceColor),

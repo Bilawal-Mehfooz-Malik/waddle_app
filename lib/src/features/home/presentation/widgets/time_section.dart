@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:waddle_app/src/common/app_sizes.dart';
+import 'package:waddle_app/src/common/reusable_label_widget.dart';
 import 'package:waddle_app/src/utils/extensions.dart';
 
 class TimeSection extends StatelessWidget {
@@ -11,8 +12,8 @@ class TimeSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _buildHourGlass(context),
-        gapH8,
-        Text(context.loc.unlocked, style: context.txtTheme.titleLarge),
+        gapH12,
+        Text(context.loc.unlocked, style: context.txtTheme.headlineSmall),
         gapH4,
         _buildMinutesText(context),
       ],
@@ -31,14 +32,8 @@ class TimeSection extends StatelessWidget {
     );
   }
 
-  Text _buildMinutesText(BuildContext context) {
+  ReusableLabelWidget _buildMinutesText(BuildContext context) {
     // TODO: Implement minutes from realtime
-    return Text(
-      '40 ${context.loc.minutes}',
-      style: context.txtTheme.bodyMedium!.copyWith(
-        color: context.color.onSecondary.withOpacity(0.4),
-        fontWeight: FontWeight.w600,
-      ),
-    );
+    return ReusableLabelWidget(text: '40 ${context.loc.minutes}');
   }
 }

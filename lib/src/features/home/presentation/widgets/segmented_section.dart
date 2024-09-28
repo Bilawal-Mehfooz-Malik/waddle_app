@@ -48,8 +48,7 @@ class SegmentedSection extends ConsumerWidget {
         isSelected ? context.color.secondary : context.color.onSecondary;
 
     return Padding(
-      padding:
-          const EdgeInsets.symmetric(vertical: Sizes.p4, horizontal: Sizes.p16),
+      padding: const EdgeInsets.symmetric(horizontal: Sizes.p24),
       child: Text(
         text,
         style: context.txtTheme.bodyLarge!
