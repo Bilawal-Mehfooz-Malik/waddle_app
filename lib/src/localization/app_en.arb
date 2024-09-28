@@ -23,6 +23,9 @@
   "minutes": "Minutes",
   "steps": "Steps",
   "scrolling": "Scrolling",
+  "today": "Today",
+  "weekly": "Weekly",
+  "montly": "Monthly",
 
   "ok":"ok"
 }

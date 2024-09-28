@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:waddle_app/src/common/app_sizes.dart';
-import 'package:waddle_app/src/features/home/presentation/controllers/home_view_controller.dart';
 import 'package:waddle_app/src/utils/extensions.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
+import 'package:waddle_app/src/features/home/presentation/controllers/home_view_controller.dart';
 
 enum HomeView { steps, scrolling }
 

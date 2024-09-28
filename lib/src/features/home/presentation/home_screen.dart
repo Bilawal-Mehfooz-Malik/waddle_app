@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:waddle_app/src/features/home/presentation/widgets/home_body.dart';
 import 'package:waddle_app/src/utils/extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:waddle_app/src/theme/theme_controller.dart';
 import 'package:waddle_app/src/features/account/data/account_repository.dart';
+import 'package:waddle_app/src/features/home/presentation/widgets/home_body.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
